@@ -1,7 +1,9 @@
-using System.Collections.Generic;
-using CastleGrimtol.Project.Interfaces;
+//NOTE This file is the equivalent of an App.cs file
 
-namespace CastleGrimtol.Project
+using System.Collections.Generic;
+using OregonTrail.Project.Interfaces;
+
+namespace OregonTrail.Project
 {
     public class GameService : IGameService
     {

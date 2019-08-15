@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using CastleGrimtol.Project.Models;
+using OregonTrail.Project.Models;
 
-namespace CastleGrimtol.Project.Interfaces
+namespace OregonTrail.Project.Interfaces
 {
     public interface IGameService
     {
