@@ -9,3 +9,5 @@ namespace OregonTrail.Project.Interfaces
         string Description { get; set; }
     }
 }
+
+//NOTE I don't think anything more needs to be done on this page

@@ -11,3 +11,5 @@ namespace OregonTrail.Project.Interfaces
         Dictionary<string, IRoom> Exits { get; set; }
     }
 }
+
+//NOTE I don't think anything more needs to be done on this page

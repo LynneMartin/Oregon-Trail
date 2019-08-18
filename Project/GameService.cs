@@ -1,5 +1,5 @@
 //NOTE This file is the equivalent of an App.cs file
-
+using System;
 using System.Collections.Generic;
 using OregonTrail.Project.Interfaces;
 using OregonTrail.Project.Models;
@@ -9,10 +9,9 @@ namespace OregonTrail.Project
     public class GameService : IGameService
     {
         public Room CurrentRoom { get; set; }
-
-    private bool Running { get; set; } = true;
-    IRoom IGameService.CurrentRoom { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-    public Player CurrentPlayer { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+        private bool Running { get; set; } = true;
+        IRoom IGameService.CurrentRoom { get; set; }
+        public Player CurrentPlayer { get; set; }
 
     //NOTE Creates all data and relationships
 
@@ -35,7 +34,7 @@ namespace OregonTrail.Project
     //NOTE Runs GameService
     public void Run()
     {
-        
+
     }
 
     public void Setup()
@@ -55,7 +54,9 @@ namespace OregonTrail.Project
 
     public void GetUserInput()
     {
-      throw new System.NotImplementedException();
+      Console.WriteLine($"What's your next move, {CurrentPlayer.PlayerName}?");
+      string UserInput = Console.ReadLine();
+      switch (UserInput.ToLower())
     }
 
     public void Quit()
@@ -65,7 +66,7 @@ namespace OregonTrail.Project
 
     public void Help()
     {
-      throw new System.NotImplementedException();
+      // print direction options, current room/state information
     }
 
     public void Go(string direction)
