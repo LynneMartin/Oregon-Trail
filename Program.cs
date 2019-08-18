@@ -11,6 +11,8 @@ namespace OregonTrail
       GameService gameService = new GameService();
       gameService.Startup();
       gameService.Run();
+      Console.WriteLine("Welcome to the Oregon Trail! Press enter to begin.");
+      Console.ReadKey(); //press any key to continue
     }
 
     }
