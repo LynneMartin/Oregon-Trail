@@ -1,4 +1,5 @@
 // using System;
+using System;
 using System.Collections.Generic;
 using OregonTrail.Project.Interfaces;
 
@@ -10,6 +11,7 @@ namespace OregonTrail.Project.Models
     public string Description { get; set; }
     public List<Item> Items { get; set; }
     public Dictionary<string, IRoom> Exits { get; set; }
+    
 
 public Room(string name, string description)
     {
@@ -17,6 +19,16 @@ public Room(string name, string description)
       Description = description;
       Items = new List<Item>();
       Exits = new Dictionary<string, IRoom>();
+    }
+
+    public IRoom Go(string direction)
+    {
+      if (Exits.ContainsKey(direction))
+      {
+        return Exits[direction];
+      }
+      Console.WriteLine("Best not go that way!");
+      return this;
     }
   }
 }

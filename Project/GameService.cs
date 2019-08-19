@@ -34,8 +34,6 @@ namespace OregonTrail.Project
     //   nebraska.AddLocation("next", wyoming);
     //   wyoming.AddLocation("next", idaho);
     //   idaho.AddLocation("next", oregon);
-
-    //   CurrentLocation = missouri;
     }
     //NOTE Runs GameService
     public void Run()
@@ -63,7 +61,6 @@ namespace OregonTrail.Project
         Console.WriteLine("Please give me your first name, my friend.");
         var name = Console.ReadLine();
         CurrentPlayer = new Player(name);
-
       }
     }
 
@@ -76,38 +73,72 @@ namespace OregonTrail.Project
 
       public void Quit()
     {
-      throw new System.NotImplementedException();
+      Console.WriteLine(@" 
+     __ _        _     __       _  _  _ ___    __ _  | 
+    (_ / \   |  / \|\|/__      |_)|_||_) | |\||_ |_) | 
+    __)\_/   |__\_/| |\_| /    |  | || \ | | ||__| \ o ");
+      Running = false;
     }
 
     public void Help()
     {
       // print direction options
-      Console.WriteLine("To move through the game, use the 'go' Command. For example, 'go north', 'go west', etc. Type 'inventory' for a list of items you have available to use to overcome a challenge, and type 'use'+item name to use it. Type 'look' to see what items are available to you in the current location. Type 'take' if you wish to add it to your inventory of supplies for the trip ahead. To leave the game, type 'quit.' ");
+      Console.WriteLine(@"
+      -To move through the game, use the 'go' Command. For example, 'go north', 'go west', etc. 
+      -Type 'inventory' for a list of items you have available to use to overcome a challenge. 
+      -Type 'use'+item name to use an item in your inventory. 
+      -Type 'look' to see what items are available to you in your current location. -Type 'take' if you wish to add it to your inventory of supplies for the trip ahead. 
+      -To leave the game, type 'quit.'
+      -Press enter to go back to the game. 
+      ");
+      Console.ReadLine();
     }
 
     public void Go(string direction)
     {
-      CurrentRoom = CurrentRoom.Go(direction); //FIXME
+      Console.Clear();
+      if (CurrentRoom.Exits.ContainsKey(direction))
+      {
+        CurrentRoom = (Room)CurrentRoom.Exits[direction];
+      }
+      else
+      {
+        Console.WriteLine("This way is blocked. Choose a different direction.");
+      }
+      }
     }
-
     public void TakeItem(string itemName)
     {
-      throw new System.NotImplementedException();
+      Item item = CurrentRoom.Items.Find(Item => Item.Name.ToLower() == itemName);
+      if (item != null)
+      {
+        CurrentRoom.Items.Remove(item);
+        CurrentPlayer.Inventory.Add(item);
+        CurrentPlayer.Inventory.Remove(item);
+      }
+      else
+      {
+        Console.WriteLine("You have no items.");
+      }
     }
 
     public void UseItem(string itemName)
     {
-      throw new System.NotImplementedException();
+      Item item = CurrentPlayer.Inventory.Find(Item => Item.Name.ToLower() == itemName);
     }
 
     public void Inventory()
     {
-      throw new System.NotImplementedException();
+      Console.WriteLine($"Inventory for {CurrentPlayer.PlayerName}: ");
+      foreach (var item in CurrentPlayer.Inventory)
+      {
+        Console.WriteLine(item.Name);
+      }
     }
 
     public void Look()
     {
-      throw new System.NotImplementedException();
+      Console.Clear();
+      Console.WriteLine($"Location: {CurrentRoom.Name}, {CurrentRoom.Description}");
     }
   }
-}
