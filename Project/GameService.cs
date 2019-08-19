@@ -8,12 +8,12 @@ namespace OregonTrail.Project
 {
   public class GameService : IGameService
   {
-    public Room CurrentRoom { get; set; }
-    public bool Running = true;
+    public Room CurrentRoom { get; set; } //talks to Models/Room.cs
+    public bool Running = true; //GameService running
     IRoom IGameService.CurrentRoom { get; set; }
     public Player CurrentPlayer { get; set; }
 
-    private bool Playing { get; set; } = true;
+    // private bool Playing { get; set; } = true;
     // ========================== START GAME ============================
     public void Startup() //NOTE WORKS!
     {
