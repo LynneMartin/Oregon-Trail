@@ -99,7 +99,8 @@ namespace OregonTrail.Project
         CurrentPlayer = new Player(name);
 //NOTE next lines shown after entering name at start of game
         Console.Clear();
-        Console.WriteLine("We begin this long journey from Independence, Missouri."); Console.WriteLine("The first State you enter ahead is Nebraska heading West. Type 'go west' to be taken there now.");
+        Console.WriteLine("We begin this long journey from Independence, Missouri."); 
+        Console.WriteLine("The first State you enter ahead is Nebraska heading West. Type 'go west' to be taken there now.");
 
         while (Running)
         {
@@ -111,8 +112,6 @@ namespace OregonTrail.Project
 
     public void GetUserInput()
     {
-      //NOTE replaces else/if -- not complete
-      //FIXME Use Command and option pattern from Planet Express
   
       string[] input = Console.ReadLine().ToLower().Split(' '); //input = ['go', 'north']
       string command = input[0]; //command = 'go'
@@ -155,7 +154,7 @@ namespace OregonTrail.Project
           Reset();
           break;
         case "quit":
-          Quit();
+          Quit(); //REVIEW is this necessary if I have Running = false below?
           Running = false;
           break;
         default: 
@@ -167,6 +166,7 @@ namespace OregonTrail.Project
 
     public void Quit() //NOTE WORKS!
     {
+      Console.Clear();
       Console.WriteLine(@" 
      __ _        _     __       _  _  _ ___    __ _  | 
     (_ / \   |  / \|\|/__      |_)|_||_) | |\||_ |_) | 
@@ -185,19 +185,16 @@ namespace OregonTrail.Project
       -Press enter to go back to the game.
       ");
       Console.ReadLine(); //FIXME "Press Enter to go back to the game" not wired up
-      Look();
     }
 
     // ========================== GO ============================
 
     public void Go(string direction)
     {
-      // CurrentRoom = CurrentRoom.Go(direction); //didn't work
 
       if (CurrentRoom.Exits.ContainsKey(direction)) //Refers to Dictionary in Room.cs
       {
         CurrentRoom = CurrentRoom.Exits[direction];
-        Look();
       }
       else
       {
@@ -207,7 +204,7 @@ namespace OregonTrail.Project
     }
     // ========================== TAKE ITEM ============================
 
-    public void TakeItem(string itemName)
+    public void TakeItem(string itemName) //FIXME unfinished
     {
       Item item = CurrentRoom.Items.Find(Item => Item.Name.ToLower() == itemName);
       if (item != null) //if you have items in the inventory, you can do the following
