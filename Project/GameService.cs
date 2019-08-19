@@ -8,7 +8,6 @@ namespace OregonTrail.Project
 {
   public class GameService : IGameService
   {
-    // public Room CurrentRoom { get; set; } //talks to Models/Room.cs
     public bool Running = true; //GameService running
     public IRoom CurrentRoom { get; set; }
     public Player CurrentPlayer { get; set; }
@@ -112,7 +111,7 @@ namespace OregonTrail.Project
 
     public void GetUserInput()
     {
-      //NOTE replaces else/if 
+      //NOTE replaces else/if -- not complete
       //FIXME Use Command and option pattern from Planet Express
       string UserInput = Console.ReadLine();
       switch (UserInput.ToLower()) 
