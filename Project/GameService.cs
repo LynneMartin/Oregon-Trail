@@ -13,6 +13,12 @@ namespace OregonTrail.Project
         IRoom IGameService.CurrentRoom { get; set; }
         public Player CurrentPlayer { get; set; }
 
+        public GameService(Player player)
+        {
+      CurrentPlayer = player;
+      Setup(); //connected to Program.cs
+        }
+
     //NOTE Creates all data and relationships
 
     public void Startup()
@@ -34,22 +40,31 @@ namespace OregonTrail.Project
     //NOTE Runs GameService
     public void Run()
     {
-
+      
     }
 
     public void Setup()
     {
-      throw new System.NotImplementedException();
+      
     }
 
     public void Reset()
     {
-      throw new System.NotImplementedException();
+      Running = false;
+      Setup();
+      StartGame();
     }
 
     public void StartGame()
     {
-      throw new System.NotImplementedException();
+      Setup();
+      {
+        Console.WriteLine("It's a risky, but potentially rewarding adventure that awaits! Can you guide this family to safety?");
+        Console.WriteLine("Please give me your first name, my friend.");
+        var name = Console.ReadLine();
+        CurrentPlayer = new Player(name);
+
+      }
     }
 
     public void GetUserInput()
@@ -66,12 +81,13 @@ namespace OregonTrail.Project
 
     public void Help()
     {
-      // print direction options, current room/state information
+      // print direction options
+      Console.WriteLine("To move through the game, use the 'go' Command. For example, 'go north', 'go west', etc. Type 'inventory' for a list of items you have available to use to overcome a challenge, and type 'use'+item name to use it. Type 'look' to see what items are available to you in the current location. Type 'take' if you wish to add it to your inventory of supplies for the trip ahead. To leave the game, type 'quit.' ");
     }
 
     public void Go(string direction)
     {
-      throw new System.NotImplementedException();
+      CurrentRoom = CurrentRoom.Go(direction); //FIXME
     }
 
     public void TakeItem(string itemName)

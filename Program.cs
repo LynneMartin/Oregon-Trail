@@ -1,5 +1,6 @@
 ﻿using System;
 using OregonTrail.Project; //REVIEW Is this correct naming convention?
+using OregonTrail.Project.Models;
 
 namespace OregonTrail
 {
@@ -8,9 +9,10 @@ namespace OregonTrail
     public static void Main(string[] args)
     {
       Console.Clear();
-      GameService gameService = new GameService();
-      gameService.Startup();
-      gameService.Run();
+      GameService gs = new GameService();
+      gs.Setup(); //Connected to GameService.cs
+      gs.Startup();
+      gs.Run();
 
       Console.WriteLine(@"
 
@@ -29,12 +31,14 @@ namespace OregonTrail
  　  └ﾞ （─＠─）======== （─＠─）=┘　　 　 　 　             /|　|　　　　}　j{  
  　 　 ＼._|_,ノ　 　 　 ＼._|_,ノ　　　　　　 　　　       《_,ヒ｝　　　《_,/_｝
 
-      ")
+      ");
 
 
 
-      Console.WriteLine("Welcome to the Oregon Trail! Press enter to begin.");
-      Console.ReadKey(); //press any key to continue
+      Console.WriteLine("Welcome to your new adventure! What is your name?");
+      string name = Console.ReadLine();
+      Console.Clear();
+      Player newPlayer = new Player(name);
     }
 
   }
