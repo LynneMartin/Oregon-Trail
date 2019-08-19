@@ -113,8 +113,16 @@ namespace OregonTrail.Project
     {
       //NOTE replaces else/if -- not complete
       //FIXME Use Command and option pattern from Planet Express
-      string UserInput = Console.ReadLine();
-      switch (UserInput.ToLower()) 
+  
+      string[] input = Console.ReadLine().ToLower().Split(' '); //input = ['go', 'north']
+      string command = input[0]; //command = 'go'
+      string option = ""; //option = ''
+      if (input.Length > 1)
+      {
+        option = input[1]; //option = 'luna'
+      }
+      //'go'
+      switch(command)
       {
         case "go north":
           Go("north");
@@ -148,6 +156,7 @@ namespace OregonTrail.Project
           break;
         case "quit":
           Quit();
+          Running = false;
           break;
         default: 
           System.Console.WriteLine("Command not recognized. Please type HELP for options, or try valid command.");
@@ -205,7 +214,6 @@ namespace OregonTrail.Project
       {
         CurrentRoom.Items.Remove(item);
         CurrentPlayer.Inventory.Add(item);
-        // CurrentPlayer.Inventory.Remove(item);
       }
       else //otherwise
       {
