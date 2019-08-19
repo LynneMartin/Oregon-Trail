@@ -43,7 +43,7 @@ namespace OregonTrail.Project
       Room ferry = new Room("Ferry: ", "Just up-river a few miles, you come across a man who offers ferry passage across the river for $2.00. Safe and sound!");
       Room oregon = new Room("Oregon", "You're almost there! You've reached a daunting mountain pass that you must cross before you make it to your new home. Which direction will you take?");
       Room mountains = new Room("Mountain Pass: ", "You've come up to a daunting and dangerous mountain pass. Foolishly, you attempted to cross, but destroyed one of your wheels again. You must fix the wheel. You died of dysentery and your child and mules died of exposure. GAME OVER. Type 'reset' to start over or 'quit' to end the game.");
-      Room home = new Room("Oregon City, Oregon:", "Home, sweet home! YOU WIN!"); //Final Room, YOU WIN!
+      Room home = new Room("Oregon City, Oregon:", "Home, sweet home! YOU WIN! Select 'reset' to play again or 'quit' to end game."); //Final Room, YOU WIN!
 
       Item Gunpowder = new Item("Sack of gunpowder: ", "Desirable trade item.");
       Item Beans = new Item("50-lb bag of beans: ", "Packed with fiber and protein.");
