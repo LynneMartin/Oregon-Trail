@@ -15,7 +15,7 @@ namespace OregonTrail.Project
 
     private bool Playing { get; set; } = true;
     // ========================== START GAME ============================
-    public void Startup()
+    public void Startup() //NOTE WORKS!
     {
       
     }
@@ -28,7 +28,7 @@ namespace OregonTrail.Project
     }
     // ========================== SETUP ============================
 
-    public void Setup()
+    public void Setup() //NOTE WORKS!
     {
       Running = true;
 
@@ -79,13 +79,13 @@ namespace OregonTrail.Project
     }
     // ========================== RESET ============================
 
-    public void Reset()
+    public void Reset() //NOTE WORKS!
     {
       StartGame();
     }
     // ========================== START GAME ============================
 
-    public void StartGame()
+    public void StartGame() //NOTE WORKS!
     {
       Setup();
       {
@@ -104,7 +104,7 @@ namespace OregonTrail.Project
 
         while (Running)
         {
-          GetUserInput();
+          GetUserInput(); //NOTE WORKS!
         }
       }
     }
@@ -157,7 +157,7 @@ namespace OregonTrail.Project
     }
     // ========================== QUIT ============================
 
-    public void Quit()
+    public void Quit() //NOTE WORKS!
     {
       Console.WriteLine(@" 
      __ _        _     __       _  _  _ ___    __ _  | 
@@ -166,25 +166,25 @@ namespace OregonTrail.Project
       Running = false;
     }
     // ========================== HELP ============================
-    public void Help()
+    public void Help() //NOTE WORKS!
     {
-      //FIXME Not printing to screen in a "pretty" way
       Console.WriteLine(@"
       -To move through the game, use the 'go' Command. For example, 'go north', 'go west', etc. 
       -Type 'inventory' for a list of items you have available to use to overcome a challenge. 
       -Type 'use'+item name to use an item in your inventory. 
       -Type 'look' to see what items are available to you in your current location. -Type 'take' if you wish to add it to your inventory of supplies for the trip ahead. 
       -To leave the game, type 'quit.'
-      -Press enter to go back to the game. 
+      -Press enter to go back to the game.
       ");
-      Console.ReadLine();
+      Console.ReadLine(); //FIXME "Press Enter to go back to the game" not wired up
+      Look();
     }
 
     // ========================== GO ============================
 
     public void Go(string direction)
     {
-      // CurrentRoom = CurrentRoom.Go(direction);
+      // CurrentRoom = CurrentRoom.Go(direction); //didn't work
 
       if (CurrentRoom.Exits.ContainsKey(direction))
       {
@@ -193,7 +193,7 @@ namespace OregonTrail.Project
       }
       else
       {
-        System.Console.WriteLine("Nothing that way.");
+        System.Console.WriteLine("Nothing that way."); //FIXME works but causes me problems with using any other direction to continue.
       }
 
     }
@@ -220,7 +220,7 @@ namespace OregonTrail.Project
       Item item = CurrentPlayer.Inventory.Find(Item => Item.Name.ToLower() == itemName);
     }
     // ========================== INVENTORY ============================
-    public void Inventory()
+    public void Inventory() //NOTE works but haven't figured out how to take items to add to the inventory
     {
       Console.WriteLine($"Inventory for {CurrentPlayer.PlayerName}: ");
       foreach (var item in CurrentPlayer.Inventory)
@@ -230,10 +230,9 @@ namespace OregonTrail.Project
     }
     // ========================== LOOK ============================
 
-    public void Look()
+    public void Look() //FIXME doesn't seem to be functioning properly
     {
-      Console.Clear();
-      Console.WriteLine($"Location: {CurrentRoom.Name}, {CurrentRoom.Description}");
+      Console.WriteLine($"{CurrentRoom.Description}");
     }
   }
 }
