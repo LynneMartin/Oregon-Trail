@@ -12,10 +12,6 @@ namespace OregonTrail.Project.Models
     public List<Item> Items { get; set; }
     public Dictionary<string, IRoom> Exits { get; set; }
 
-    public void AddExit(string direction, IRoom room)
-    {
-      Exits.Add(direction, room);
-    }
 
     
 public Room(string name, string description)
@@ -28,7 +24,7 @@ public Room(string name, string description)
 
     public IRoom Go(string direction)
     {
-      if (Exits.ContainsKey(direction))
+      if (Exits.ContainsKey(direction)) //NOTE "ContainsKey" method checks to see if key is present within dictionary
       {
         return Exits[direction];
       }
