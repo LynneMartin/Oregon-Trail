@@ -9,7 +9,7 @@ namespace OregonTrail.Project
   public class GameService : IGameService
   {
     public Room CurrentRoom { get; set; }
-    private bool Running { get; set; } = true;
+    public bool Running = true;
     IRoom IGameService.CurrentRoom { get; set; }
     public Player CurrentPlayer { get; set; }
 
@@ -18,14 +18,23 @@ namespace OregonTrail.Project
       CurrentPlayer = player;
       Setup(); //connected to Program.cs
     }
-    // ========================== STARTUP ============================
-
-    //NOTE Creates all data and relationships
-
+    // ========================== START GAME ============================
     public void Startup()
     {
-      //Create all rooms/States
-      //   Room missouri = new Room("Missouri"); //starting point REVIEW is this needed?
+      
+    }
+    // ========================== RUN ============================
+
+    //NOTE Runs GameService
+    public void Run()
+    {
+      //TODO set this up
+    }
+    // ========================== SETUP ============================
+
+    public void Setup()
+    {
+      //TODO Set up Rooms/States & description
       //   Room nebraska = new Room("Nebraska"); //Room 1
       //   Room wyoming = new Room("Wyoming"); //Room 2
       //   Room idaho = new Room("Idaho"); //Room 3
@@ -35,19 +44,7 @@ namespace OregonTrail.Project
       //   nebraska.AddLocation("next", wyoming);
       //   wyoming.AddLocation("next", idaho);
       //   idaho.AddLocation("next", oregon);
-    }
-    // ========================== RUN ============================
-
-    //NOTE Runs GameService
-    public void Run()
-    {
-
-    }
-    // ========================== SETUP ============================
-
-    public void Setup()
-    {
-
+      //TODO Set up Room/State exits
     }
     // ========================== RESET ============================
 
@@ -67,6 +64,13 @@ namespace OregonTrail.Project
         Console.WriteLine("Please give me your first name, my friend.");
         var name = Console.ReadLine();
         CurrentPlayer = new Player(name);
+
+        Console.WriteLine("We begin this long journey from Independence, Missouri."); Console.WriteLine("The first State you enter is Nebraska. There's no turning back now!");
+
+        while (Running)
+        {
+          GetUserInput();
+        }
       }
     }
     // ========================== GET USER INPUT ============================
