@@ -28,22 +28,51 @@ namespace OregonTrail.Project
     //NOTE Runs GameService
     public void Run()
     {
-      //TODO set this up
+    
     }
     // ========================== SETUP ============================
 
     public void Setup()
     {
+      Running = true;
+
       //TODO Set up Rooms/States & description
-      //   Room nebraska = new Room("Nebraska"); //Room 1
-      //   Room wyoming = new Room("Wyoming"); //Room 2
-      //   Room idaho = new Room("Idaho"); //Room 3
-      //   Room oregon = new Room("Oregon"); //Room 4, final room
+
+      Room missouri = new Room("Missouri", "Starting point.");
+      Room nebraska = new Room("Nebraska", "The first State you enter.", "Going Westward, halfway across the plains, a wheel falls apart and you are separated from the wagon train. A group of Natives are spotted to the North approaching your newly-repaired wagon. If you are to get out of this situation alive, you must find something of value to offer them, or attempt to escape."); //Room 1, natives
+      Room escape = new Room("Escape", "You attempt to escape by heading South, but find yourself trapped by a different band of hostile Native warriors and they show no mercy. YOU LOSE.")
+      Room wyoming = new Room("Wyoming"); //Halfway there, but starvation looms
+      Room mercantile = new Room("Mercantile"); //Pick up food here
+      Room wilderness = new Room("Wilderness", "You headed Northward toward rough terrain, getting lost, losing time, and starve to death. GAME OVER."); //You'll lose too much time and starve to death
+      Room idaho = new Room("Idaho");
+      Room river = new Room("River", "You've reached a wide river that is deceptively deep. You attempt to cross, but are swept away, drowning all. GAME OVER.");
+      Room oregon = new Room("Oregon"); //Room 4, mountain pass
+        Room home = new Room("Baker City, Oregon", "End"); //Final Room, YOU WIN!
+
+      Item Gunpowder = new Item("Sack of gunpowder: ", "Desirable trade item.");
+      Item Beans = new Item("50-lb bag of beans: ", "Packed with fiber and protein.");
+      Item Coins = new Item("Purse of coins: ", "Looks to be approximately $5.00-worth.");
+      Item WagonWheel = new Item("Wagon Wheel: ", "Replacement wagon wheel.");
+
+      missouri.Exits.Add("west", wyoming);
+      nebraska.Exits.Add("east", missouri);
+      nebraska.Exits.Add("south", escape); //Dead-end to hostile Natives. You all die!
+      nebraska.Items.Add(Gunpowder); //Needed to trade with friendlier Natives.
+      wyoming.Exits.Add("west", idaho);
+      wyoming.Exits.Add("south", mercantile, "You've reached a small town with a local Mercantile. Here, you can purchase food to fend off starvation."); //You'll avoid starvation
+      wyoming.Exits.Add("east", wyoming); 
+      wyoming.Exits.Add("north", wilderness); //You get lost and lose too much time, so you starve to death.
+      wyoming.Items.Add(Beans);
+      idaho.Exits.Add("west", oregon);
+      idaho.Exits.Add("east", wyoming);
+
+
+
 
       //   //Establish Relationships
-      //   nebraska.AddLocation("next", wyoming);
-      //   wyoming.AddLocation("next", idaho);
-      //   idaho.AddLocation("next", oregon);
+      // nebraska.AddLocation("next", wyoming);
+      // wyoming.AddLocation("next", idaho);
+      // idaho.AddLocation("next", oregon);
       //TODO Set up Room/State exits
     }
     // ========================== RESET ============================
@@ -84,7 +113,7 @@ namespace OregonTrail.Project
     public void GetUserInput()
     {
       //NOTE next question following "There's no turning back now!" in StartGame
-      Console.WriteLine($"Check your compass and tell me which direction you'd like to go, {CurrentPlayer.PlayerName}. (Type 'help' if you're not sure.)");
+      Console.WriteLine($"Check your compass and tell me which direction you'd like to go, {CurrentPlayer.PlayerName}.");
       string UserInput = Console.ReadLine();
       switch (UserInput.ToLower())
       {
@@ -121,8 +150,8 @@ namespace OregonTrail.Project
         case "quit":
           Quit();
           break;
-        default:
-          System.Console.WriteLine("Command not recognized. Please type HELP and enter for options, or try new command.");
+        default: 
+          System.Console.WriteLine("Command not recognized. Please type HELP for options, or try valid command.");
           break;
       }
     }
@@ -139,7 +168,7 @@ namespace OregonTrail.Project
     // ========================== HELP ============================
     public void Help()
     {
-      // print direction options
+      //FIXME Not printing to screen in a "pretty" way
       Console.WriteLine(@"
       -To move through the game, use the 'go' Command. For example, 'go north', 'go west', etc. 
       -Type 'inventory' for a list of items you have available to use to overcome a challenge. 
