@@ -2,11 +2,11 @@
 
 ### Story
 
-A widower in his mid-thirties decides that Kansas City harbors too many memories of his beloved departed wife, and, in order to move on, must leave and start anew with his loyal dog and young daughter. At a pub, he overhears talk of a second wave of people leaving in 3 weeks for the wide open spaces of the Western Territories. This is EXACTLY the change he's needing to make in his life, so he heads home to pack up, sells his home to purchase a covered wagon, 2 oxen, food and supplies for the trip.
+A widow decides that Kansas City harbors too many memories of her beloved departed husband, and, in order to move on, must leave and start anew with her young daughter. At church, she overhears talk of a second wave of people leaving in 3 weeks for the wide open spaces of the Western Territories. This is EXACTLY the change she's needing to make in her life, so she heads home to pack up, sells her home to purchase a covered wagon, 2 mules, food and supplies for the trip.
 
-The scene begins in Independence, Missouri, where he meets up with the wagon train to set off towards a new life for his small family. They travel through 4 States during this adventure; Nebraska, Wyoming, Idaho, and finally settling in Baker City, Oregon.
+The scene begins in Independence, Missouri, where she meets up with the wagon train to set off towards a new life. They travel through 4 States during this adventure; Nebraska, Wyoming, Idaho, and finally settling in Baker City, Oregon.
 
-The young widower must navigate across swift rivers, come across potentially hostile Natives, avoid starvation and deadly disease, and cross seemingly impossible mountainous terrain before he can reach his destination. Making the right decisions in every situation is vital for survival. One wrong decision and his family can perish! It is a risky and exhausting journey. Can you guide them safely to Oregon?
+The young widow must navigate across swift rivers, come across potentially hostile Natives, avoid starvation and deadly disease, and cross seemingly impossible mountainous terrain before he can reach her destination. Making the right decisions in every situation is vital for survival. One wrong decision and her family can perish! It is a risky and exhausting journey. Can you guide them safely to Oregon?
 
 ### Gameplay
 

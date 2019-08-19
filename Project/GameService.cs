@@ -54,12 +54,12 @@ namespace OregonTrail.Project
 
     public void GetUserInput()
     {
-      Console.WriteLine($"What's your next move, {CurrentPlayer.PlayerName}?");
-      string UserInput = Console.ReadLine();
-      switch (UserInput.ToLower())
+    //   Console.WriteLine($"What's your next move, {CurrentPlayer.PlayerName}?");
+    //   string UserInput = Console.ReadLine();
+    //   switch (UserInput.ToLower())
     }
 
-    public void Quit()
+      public void Quit()
     {
       throw new System.NotImplementedException();
     }
