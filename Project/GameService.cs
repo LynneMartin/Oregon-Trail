@@ -8,11 +8,10 @@ namespace OregonTrail.Project
 {
   public class GameService : IGameService
   {
-    public bool Running = true; //GameService running
+    public bool Running { get; set; } = true; //GameService running
     public IRoom CurrentRoom { get; set; }
     public Player CurrentPlayer { get; set; }
 
-    // private bool Playing { get; set; } = true;
     // ========================== START GAME ============================
     public void Startup() //NOTE WORKS!
     {
@@ -49,7 +48,7 @@ namespace OregonTrail.Project
       Item Coins = new Item("Purse of coins: ", "Looks to be approximately $5.00-worth.");
       Item WagonWheel = new Item("Wagon Wheel: ", "Replacement wagon wheel.");
 
-      missouri.Exits.Add("west", nebraska); //NOTE talks to Room constructor in Room.cs
+      missouri.Exits.Add("west", nebraska); //NOTE talks to Room constructor in Room.cs. Starting point.
 
       nebraska.Exits.Add("west", wyoming);
       nebraska.Exits.Add("east", missouri); // back to starting point
@@ -100,7 +99,8 @@ namespace OregonTrail.Project
 //NOTE next lines shown after entering name at start of game
         Console.Clear();
         Console.WriteLine("We begin this long journey from Independence, Missouri."); 
-        Console.WriteLine("The first State you enter ahead is Nebraska heading West. Type 'go west' to be taken there now.");
+        Console.WriteLine("The first State you enter ahead is Nebraska heading West."); 
+        Console.WriteLine("Type 'go west' to be taken there now.");
 
         while (Running)
         {
@@ -112,7 +112,7 @@ namespace OregonTrail.Project
 
     public void GetUserInput()
     {
-  
+      //referenced in planet-express example
       string[] input = Console.ReadLine().ToLower().Split(' '); //input = ['go', 'north']
       string command = input[0]; //command = 'go'
       string option = ""; //option = ''
@@ -174,40 +174,48 @@ namespace OregonTrail.Project
       Running = false; //stops the game
     }
     // ========================== HELP ============================
-    public void Help() //NOTE WORKS!
+    public void Help() //NOTE WORKS, except "enter to go back to the game"!
     {
+      // Console.Clear();
       Console.WriteLine(@"
       -To move through the game, use the 'go' Command. For example, 'go north', 'go west', etc. 
+
       -Type 'inventory' for a list of items you have available to use to overcome a challenge. 
+
       -Type 'use'+item name to use an item in your inventory. 
-      -Type 'look' to see what items are available to you in your current location. -Type 'take' if you wish to add it to your inventory of supplies for the trip ahead. 
+
+      -Type 'look' to see what items are available to you in your current location. 
+      
+      -Type 'take' if you wish to add it to your inventory of supplies for the trip ahead. 
+
       -To leave the game, type 'quit.'
-      -Press enter to go back to the game.
+
+      -Press enter to go back to the game. 
       ");
-      Console.ReadLine(); //FIXME "Press Enter to go back to the game" not wired up
+      Console.ReadLine(); //FIXME "Press Enter to go back to the game" not wired up. Should the command be "exit" or "done" to go back to current room instead of the act of pressing the enter button?
     }
 
     // ========================== GO ============================
 
     public void Go(string direction)
     {
-
       if (CurrentRoom.Exits.ContainsKey(direction)) //Refers to Dictionary in Room.cs
       {
+        Console.WriteLine("Onward, mules!");
+        Console.Clear();
         CurrentRoom = CurrentRoom.Exits[direction];
       }
       else
       {
-        System.Console.WriteLine("Nothing that way."); //NOTE (resolved) works but causes me problems with using any other direction to continue.
+        Console.WriteLine("Nothing that way."); 
       }
-
     }
     // ========================== TAKE ITEM ============================
 
-    public void TakeItem(string itemName) //FIXME unfinished
+    public void TakeItem(string itemName) //FIXME unfinished. an if/else statement is a familiar way to go, but can I do this with less code?
     {
       Item item = CurrentRoom.Items.Find(Item => Item.Name.ToLower() == itemName);
-      if (item != null) //if you have items in the inventory, you can do the following
+      if (item != null) 
       {
         CurrentRoom.Items.Remove(item);
         CurrentPlayer.Inventory.Add(item);
