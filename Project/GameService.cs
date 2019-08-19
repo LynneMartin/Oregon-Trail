@@ -6,44 +6,44 @@ using OregonTrail.Project.Models;
 
 namespace OregonTrail.Project
 {
-    public class GameService : IGameService
-    {
-        public Room CurrentRoom { get; set; }
-        private bool Running { get; set; } = true;
-        IRoom IGameService.CurrentRoom { get; set; }
-        public Player CurrentPlayer { get; set; }
+  public class GameService : IGameService
+  {
+    public Room CurrentRoom { get; set; }
+    private bool Running { get; set; } = true;
+    IRoom IGameService.CurrentRoom { get; set; }
+    public Player CurrentPlayer { get; set; }
 
-        public GameService(Player player)
-        {
+    public GameService(Player player)
+    {
       CurrentPlayer = player;
       Setup(); //connected to Program.cs
-        }
+    }
 
     //NOTE Creates all data and relationships
 
     public void Startup()
     {
       //Create all rooms/States
-    //   Room missouri = new Room("Missouri"); //starting point REVIEW is this needed?
-    //   Room nebraska = new Room("Nebraska"); //Room 1
-    //   Room wyoming = new Room("Wyoming"); //Room 2
-    //   Room idaho = new Room("Idaho"); //Room 3
-    //   Room oregon = new Room("Oregon"); //Room 4, final room
+      //   Room missouri = new Room("Missouri"); //starting point REVIEW is this needed?
+      //   Room nebraska = new Room("Nebraska"); //Room 1
+      //   Room wyoming = new Room("Wyoming"); //Room 2
+      //   Room idaho = new Room("Idaho"); //Room 3
+      //   Room oregon = new Room("Oregon"); //Room 4, final room
 
-    //   //Establish Relationships
-    //   nebraska.AddLocation("next", wyoming);
-    //   wyoming.AddLocation("next", idaho);
-    //   idaho.AddLocation("next", oregon);
+      //   //Establish Relationships
+      //   nebraska.AddLocation("next", wyoming);
+      //   wyoming.AddLocation("next", idaho);
+      //   idaho.AddLocation("next", oregon);
     }
     //NOTE Runs GameService
     public void Run()
     {
-      
+
     }
 
     public void Setup()
     {
-      
+
     }
 
     public void Reset()
@@ -66,12 +66,12 @@ namespace OregonTrail.Project
 
     public void GetUserInput()
     {
-    //   Console.WriteLine($"What's your next move, {CurrentPlayer.PlayerName}?");
-    //   string UserInput = Console.ReadLine();
-    //   switch (UserInput.ToLower())
+      //   Console.WriteLine($"What's your next move, {CurrentPlayer.PlayerName}?");
+      //   string UserInput = Console.ReadLine();
+      //   switch (UserInput.ToLower())
     }
 
-      public void Quit()
+    public void Quit()
     {
       Console.WriteLine(@" 
      __ _        _     __       _  _  _ ___    __ _  | 
@@ -105,36 +105,35 @@ namespace OregonTrail.Project
       {
         Console.WriteLine("This way is blocked. Choose a different direction.");
       }
-      }
     }
-    public void TakeItem(string itemName)
+  public void TakeItem(string itemName)
+  {
+    Item item = CurrentRoom.Items.Find(Item => Item.Name.ToLower() == itemName);
+    if (item != null)
     {
-      Item item = CurrentRoom.Items.Find(Item => Item.Name.ToLower() == itemName);
-      if (item != null)
-      {
-        CurrentRoom.Items.Remove(item);
-        CurrentPlayer.Inventory.Add(item);
-        CurrentPlayer.Inventory.Remove(item);
-      }
-      else
-      {
-        Console.WriteLine("You have no items.");
-      }
+      CurrentRoom.Items.Remove(item);
+      CurrentPlayer.Inventory.Add(item);
+      CurrentPlayer.Inventory.Remove(item);
     }
+    else
+    {
+      Console.WriteLine("You have no items.");
+    }
+  }
 
-    public void UseItem(string itemName)
-    {
-      Item item = CurrentPlayer.Inventory.Find(Item => Item.Name.ToLower() == itemName);
-    }
+public void UseItem(string itemName)
+  {
+    Item item = CurrentPlayer.Inventory.Find(Item => Item.Name.ToLower() == itemName);
+  }
 
-    public void Inventory()
+  public void Inventory()
+  {
+    Console.WriteLine($"Inventory for {CurrentPlayer.PlayerName}: ");
+    foreach (var item in CurrentPlayer.Inventory)
     {
-      Console.WriteLine($"Inventory for {CurrentPlayer.PlayerName}: ");
-      foreach (var item in CurrentPlayer.Inventory)
-      {
-        Console.WriteLine(item.Name);
-      }
+      Console.WriteLine(item.Name);
     }
+  }
 
     public void Look()
     {
@@ -142,3 +141,4 @@ namespace OregonTrail.Project
       Console.WriteLine($"Location: {CurrentRoom.Name}, {CurrentRoom.Description}");
     }
   }
+}
