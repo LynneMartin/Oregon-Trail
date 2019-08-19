@@ -212,7 +212,7 @@ namespace OregonTrail.Project
     }
     // ========================== TAKE ITEM ============================
 
-    public void TakeItem(string itemName) //FIXME unfinished. an if/else statement is a familiar way to go, but can I do this with less code?
+    public void TakeItem(string itemName) //FIXME unfinished TEST. an if/else statement is a familiar way to go, but this can be done differently
     {
       Item item = CurrentRoom.Items.Find(Item => Item.Name.ToLower() == itemName);
       if (item != null) 
