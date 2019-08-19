@@ -18,6 +18,7 @@ namespace OregonTrail.Project
       CurrentPlayer = player;
       Setup(); //connected to Program.cs
     }
+    // ========================== STARTUP ============================
 
     //NOTE Creates all data and relationships
 
@@ -35,16 +36,20 @@ namespace OregonTrail.Project
       //   wyoming.AddLocation("next", idaho);
       //   idaho.AddLocation("next", oregon);
     }
+    // ========================== RUN ============================
+
     //NOTE Runs GameService
     public void Run()
     {
 
     }
+    // ========================== SETUP ============================
 
     public void Setup()
     {
 
     }
+    // ========================== RESET ============================
 
     public void Reset()
     {
@@ -52,6 +57,7 @@ namespace OregonTrail.Project
       Setup();
       StartGame();
     }
+    // ========================== START GAME ============================
 
     public void StartGame()
     {
@@ -63,6 +69,7 @@ namespace OregonTrail.Project
         CurrentPlayer = new Player(name);
       }
     }
+    // ========================== GET USER INPUT ============================
 
     public void GetUserInput()
     {
@@ -107,6 +114,8 @@ namespace OregonTrail.Project
           System.Console.WriteLine("Command not recognized. Please type HELP and enter for options, or try new command.");
       }
     }
+    // ========================== QUIT ============================
+
     public void Quit()
     {
       Console.WriteLine(@" 
@@ -115,7 +124,7 @@ namespace OregonTrail.Project
     __)\_/   |__\_/| |\_| /    |  | || \ | | ||__| \ o ");
       Running = false;
     }
-
+    // ========================== HELP ============================
     public void Help()
     {
       // print direction options
@@ -130,6 +139,8 @@ namespace OregonTrail.Project
       Console.ReadLine();
     }
 
+    // ========================== GO ============================
+
     public void Go(string direction)
     {
       Console.Clear();
@@ -142,6 +153,8 @@ namespace OregonTrail.Project
         Console.WriteLine("This way is blocked. Choose a different direction.");
       }
     }
+    // ========================== TAKE ITEM ============================
+
     public void TakeItem(string itemName)
     {
       Item item = CurrentRoom.Items.Find(Item => Item.Name.ToLower() == itemName);
@@ -156,12 +169,13 @@ namespace OregonTrail.Project
         Console.WriteLine("You have no items.");
       }
     }
+    // ========================== USE ITEM ============================
 
     public void UseItem(string itemName)
     {
       Item item = CurrentPlayer.Inventory.Find(Item => Item.Name.ToLower() == itemName);
     }
-
+    // ========================== INVENTORY ============================
     public void Inventory()
     {
       Console.WriteLine($"Inventory for {CurrentPlayer.PlayerName}: ");
@@ -170,6 +184,7 @@ namespace OregonTrail.Project
         Console.WriteLine(item.Name);
       }
     }
+    // ========================== LOOK ============================
 
     public void Look()
     {
