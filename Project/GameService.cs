@@ -32,7 +32,7 @@ namespace OregonTrail.Project
     {
       Running = true;
 
-      Room missouri = new Room("Missouri", "Starting point.");
+      Room missouri = new Room("Missouri", "Starting point."); //take in a name and description
       Room nebraska = new Room("Nebraska", "Going Westward, halfway across the plains, a wheel falls apart and you are separated from the wagon train. A group of Natives are spotted to the North approaching your newly-repaired wagon. If you are to get out of this situation alive, you must find something of value to offer them, or attempt to escape. Choose your direction.");
       Room escape = new Room("Escape", "You attempt to escape by heading South, but find yourself trapped by a different band of hostile Native warriors and they show no mercy. YOU DIE A HORRIBLE DEATH. Type 'reset' to start over or 'quit' to end the game.");
       Room wyoming = new Room("Wyoming", "Your family is hungry. Where can you go to find more food supplies? Choose your direction."); //Halfway there, but starvation looms
@@ -50,7 +50,7 @@ namespace OregonTrail.Project
       Item Coins = new Item("Purse of coins: ", "Looks to be approximately $5.00-worth.");
       Item WagonWheel = new Item("Wagon Wheel: ", "Replacement wagon wheel.");
 
-      missouri.Exits.Add("west", nebraska);
+      missouri.Exits.Add("west", nebraska); //NOTE talks to Room constructor in Room.cs
 
       nebraska.Exits.Add("west", wyoming);
       nebraska.Exits.Add("east", missouri); // back to starting point
@@ -74,7 +74,7 @@ namespace OregonTrail.Project
       oregon.Exits.Add("west", mountains); //GAME OVER unless you use a wagon wheel
       oregon.Items.Add(WagonWheel); //Needed to cross the mountains
 
-      CurrentRoom = missouri;
+      CurrentRoom = missouri; //NOTE starting point
 
     }
     // ========================== RESET ============================
@@ -163,7 +163,7 @@ namespace OregonTrail.Project
      __ _        _     __       _  _  _ ___    __ _  | 
     (_ / \   |  / \|\|/__      |_)|_||_) | |\||_ |_) | 
     __)\_/   |__\_/| |\_| /    |  | || \ | | ||__| \ o ");
-      Running = false;
+      Running = false; //stops the game
     }
     // ========================== HELP ============================
     public void Help() //NOTE WORKS!
@@ -202,13 +202,13 @@ namespace OregonTrail.Project
     public void TakeItem(string itemName)
     {
       Item item = CurrentRoom.Items.Find(Item => Item.Name.ToLower() == itemName);
-      if (item != null)
+      if (item != null) //if you have items in the inventory, you can do the following
       {
         CurrentRoom.Items.Remove(item);
         CurrentPlayer.Inventory.Add(item);
         CurrentPlayer.Inventory.Remove(item);
       }
-      else
+      else //otherwise
       {
         Console.WriteLine("You have no items.");
       }
@@ -218,6 +218,7 @@ namespace OregonTrail.Project
     public void UseItem(string itemName)
     {
       Item item = CurrentPlayer.Inventory.Find(Item => Item.Name.ToLower() == itemName);
+      //FIXME unfinished
     }
     // ========================== INVENTORY ============================
     public void Inventory() //NOTE works but haven't figured out how to take items to add to the inventory
