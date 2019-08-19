@@ -230,7 +230,7 @@ namespace OregonTrail.Project
     }
     // ========================== LOOK ============================
 
-    public void Look() //FIXME doesn't seem to be functioning properly
+    public void Look() 
     {
       Console.WriteLine($"{CurrentRoom.Description}");
     }

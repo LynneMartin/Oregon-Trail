@@ -31,61 +31,20 @@ There are four key "rooms" in this story. Entering a room/State will trigger an 
 
 <!-- SECTION The first room/State you enter -->
 - Nebraska
-	<!-- - Description: "You find yourself in a small hall there doesnt appear to be anything of interest here. <List Exits> You see a passage to the ['North', 'South <key> ? UseKey : "Locked"']", -->
+"Going Westward, halfway across the plains, a wheel falls apart and you are separated from the wagon train. A group of Natives are spotted to the North approaching your newly-repaired wagon. If you are to get out of this situation alive, you must find something of value to offer them, or attempt to escape. Choose your direction."
 
 <!-- SECTION Halfway point! -->
 - Wyoming
-	<!-- - Description: "You see a room with several sleeping guards, The room smells of sweaty men. The bed closest to you is empty and there are several uniforms tossed about."
-	- Actions: {
+	"Your family is hungry. Where can you go to find more food supplies? Choose your direction."
 		
-		- use bed: "You climb into the bed and pretend to be asleep. A few minutes later several guards walk into the room. One approaches you to wake you... (GUARD) "Hey Get Up! it's your turn for watch, Go relieve Shigeru in the Guard Room" Quickly you climb out of the bed",
-		
-		- use bed * 2: "(GUARD) What do you think your doing? Hey your not Leroy, Quick Jenkins sieze him.... Jenkins a bit over-zelous swings his sword cleaving you in half... <DEATH MESSAGE>",
-		
-		- take uniform: "You placed the Guard Uniform in your inventory"
-	},
-	- Items: ['Guard Uniform'],
-	- Exits: ['South'] -->
 
 <!-- SECTION Nearly there!-->
 - Idaho
-	<!-- - Description: "You step into the large castle courtyard there is a flowing fountain in the middle of the grounds and a few guards patrolling the area 
-	- Events
-		- <Using Guard Uniform> 
-			-"Oi, long night tonight I wish I was in my bed. If your just getting on shift your should go talk to the captain." 
-		- <!Using Guard Uniform> 
-			- "To your left you see a guard approaching you. (GUARD) Wat who the blazes are you? Quickly he raises the alarm and several of the crossbow men turn and fire on you. You realize you have made a grave mistake as a bolt slams into your body... <DEATH MESSAGE>">"
-	
-	- Actions: {
-	
-		- use key: "You approach the door and slide the key into the lock. It clicks, The door can now be opened",
-
-	},
-	
-	- Items: [],
-
-	- Exits: ['South', 'West', 'North'] -->
+"You're only 8 days away from your destination, but you reach a deep and swift river. Do you try and cross? Or do you try a different way? Choose your direction."
 
 <!-- SECTION Final leg of the journey. Don't give up now! -->
 - Oregon
-	<!-- - Description: "As you approach the captains Quarters you swallow hard and notice your lips are dry, Stepping into the room you see a few small tables and maps of the countryside sprawled out. 
-	
-	- Events 
-		<!-- - <CAPTAIN_IN_ROOM && INVENTORYCHECK !`broken lock`> 
-			- The captain on shift greets you (CAPTAIN) New recruit huh. Well lets stick you in the guard room you can't screw things up there. Go relieve (He pauses and glancing at his reports) private Miyamoto.
-		- <CAPTAIN_IN_ROOM && INVENTORYCHECK `broken lock`> 
-			- "What are you doing back here? I told you to stay in the Guard Room" 
-		- <!CAPTAIN_IN_ROOM>
-			- "With the captain gone you look around and notice a pouch of vials hung from the back of the chair the captain was sitting at. The vials are holding a green liquid.">",
-	
-	- Actions: {
-	
-		- use brocke lock: "What an escaped prisoner... When did this happen? Quick take this (He slams a silver key on the table and jots down a quick note) go fetch a messenger boy for me and have him take this note the Gate Captain Ezio, but keep this quite. If That prisoner is really has escaped it will be both our heads. (CAPTAIN) I'll go rouse the guards, (The captain runs to the door north heading for the Barracks)",
-		
-		- take key: "Quickly you pocket the silver key"
-	},
-	- Items: ["key", "note", "vial"],
-	- Exits: ['north', 'east'] -->
+"You're almost there! You've reached a daunting mountain pass that you must cross before you make it to your new home. Which direction will you take?"
 
 
 ### Victory Conditions
@@ -98,51 +57,15 @@ You will likely succeed or fail in this game. Here are some messages:
 	- "You've reached a wide river that is deceptively deep. You attempt to cross, but are swept away, drowning all. GAME OVER."
 	- "You've come up to a daunting and dangerous mountain pass. Foolishly, you attempted to cross, but destroyed one of your wheels again. You must fix the wheel. You died of dysentery and your child and mules died of exposure. GAME OVER."
 - Natives Allow Passage: "The Natives accept your gift and allow safe passage."
-- No Starvation Today: "Sweet relief! Your family are fed and healthy. And your mules 		won't eat you."
+- No Starvation Today: "Sweet relief! Your family are fed and healthy. And your mules	won't eat you."
 - River Passage: "You made it across the river safely! Onward!"
 - Mountain Pass: "Your wagon wheels held up and you reached the other side of the mountain pass in one piece! You are home!"
 
 ### Cheaters Guide
 
-Simply put, this is a game that can be completed with the following steps.
+This is a game that can be completed with the following simple steps.
 
-<!-- - Go North
-- Use Bed // For Points Only
-- Take Uniform 
-- Use Uniform
-- Go South
-- Go West
-- Go South
-- Go West
-- Take Tools
-- Go North
-- Use Hammer
-- Take Lock
-- Go South
-- Go West
-- Go West
-- Use Lock
-- Take Vial
-- Go East
-- Go North
-- Go North
-- Go East
-- Take Overcoat
-- Use Note
-- Go North
-- Take Key
-- Go South
-- Go West
-- Go South
-- Go South
-- Go East
-- Go North
-- Use Overcoat
-- Go South
-- Go West
-- Go North
-- Go North
-- Use Key // For Points Only 
-- Go East
-- Go North
-- Use Window  -->
+Nebraska - go west
+Wyoming - go west
+Idaho - go west
+Oregon - go north
