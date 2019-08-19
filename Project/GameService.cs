@@ -13,11 +13,7 @@ namespace OregonTrail.Project
     IRoom IGameService.CurrentRoom { get; set; }
     public Player CurrentPlayer { get; set; }
 
-    // public GameService(Player player)
-    // {
-    //   CurrentPlayer = player;
-    //   Setup(); //connected to Program.cs
-    // }
+    private bool Playing { get; set; } = true;
     // ========================== START GAME ============================
     public void Startup()
     {
@@ -85,8 +81,6 @@ namespace OregonTrail.Project
 
     public void Reset()
     {
-      Running = false;
-      Setup();
       StartGame();
     }
     // ========================== START GAME ============================
@@ -190,6 +184,8 @@ namespace OregonTrail.Project
 
     public void Go(string direction)
     {
+      // CurrentRoom = CurrentRoom.Go(direction);
+
       if (CurrentRoom.Exits.ContainsKey(direction))
       {
         CurrentRoom = (Room)CurrentRoom.Exits[direction];
@@ -199,15 +195,7 @@ namespace OregonTrail.Project
       {
         System.Console.WriteLine("Nothing that way.");
       }
-      // Console.Clear();
-      // if (CurrentRoom.Exits.ContainsKey(direction))
-      // {
-      //   CurrentRoom = (Room)CurrentRoom.Exits[direction];
-      // }
-      // else
-      // {
-      //   Console.WriteLine("This way is blocked. Choose a different direction.");
-      // }
+
     }
     // ========================== TAKE ITEM ============================
 
