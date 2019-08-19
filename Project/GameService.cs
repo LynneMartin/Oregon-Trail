@@ -112,10 +112,9 @@ namespace OregonTrail.Project
 
     public void GetUserInput()
     {
-      //NOTE next question following "There's no turning back now!" in StartGame
-      // Console.WriteLine($"When you're ready to head 'em up and move 'em out, type 'go west' now, {CurrentPlayer.PlayerName}.");
+      //NOTE replaces else/if 
       string UserInput = Console.ReadLine();
-      switch (UserInput.ToLower())
+      switch (UserInput.ToLower()) 
       {
         case "go north":
           Go("north");
@@ -186,7 +185,7 @@ namespace OregonTrail.Project
     {
       // CurrentRoom = CurrentRoom.Go(direction); //didn't work
 
-      if (CurrentRoom.Exits.ContainsKey(direction))
+      if (CurrentRoom.Exits.ContainsKey(direction)) //Refers to Dictionary in Room.cs
       {
         CurrentRoom = (Room)CurrentRoom.Exits[direction];
         Look();
@@ -224,7 +223,7 @@ namespace OregonTrail.Project
     public void Inventory() //NOTE works but haven't figured out how to take items to add to the inventory
     {
       Console.WriteLine($"Inventory for {CurrentPlayer.PlayerName}: ");
-      foreach (var item in CurrentPlayer.Inventory)
+      foreach (var item in CurrentPlayer.Inventory) //iterates over each item in the player's inventory
       {
         Console.WriteLine($"{ item.Name}");
       }
@@ -233,7 +232,7 @@ namespace OregonTrail.Project
 
     public void Look() 
     {
-      Console.WriteLine($"{CurrentRoom.Description}");
+      Console.WriteLine($"{CurrentRoom.Description}"); //show's the current room's description
     }
   }
 }
