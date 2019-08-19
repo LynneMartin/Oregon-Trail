@@ -116,6 +116,7 @@ namespace OregonTrail.Project
           break;
         default:
           System.Console.WriteLine("Command not recognized. Please type HELP and enter for options, or try new command.");
+          break;
       }
     }
     // ========================== QUIT ============================
