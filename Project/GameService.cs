@@ -74,7 +74,7 @@ namespace OregonTrail.Project
       oregon.Exits.Add("west", mountains); //GAME OVER unless you use a wagon wheel
       oregon.Items.Add(WagonWheel); //Needed to cross the mountains
 
-      CurrentRoom = nebraska;
+      CurrentRoom = missouri;
 
     }
     // ========================== RESET ============================
