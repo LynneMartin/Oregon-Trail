@@ -66,11 +66,47 @@ namespace OregonTrail.Project
 
     public void GetUserInput()
     {
-      //   Console.WriteLine($"What's your next move, {CurrentPlayer.PlayerName}?");
-      //   string UserInput = Console.ReadLine();
-      //   switch (UserInput.ToLower())
+      Console.WriteLine($"What's your pleasure, {CurrentPlayer.PlayerName} ?");
+      string UserInput = Console.ReadLine();
+      switch (UserInput.ToLower())
+      {
+        case "go north":
+          Go("north");
+          break;
+        case "go south":
+          Go("south");
+          break;
+        case "go east":
+          Go("east");
+          break;
+        case "go west":
+          Go("west");
+          break;
+        case "look":
+          Look();
+          break;
+        case "inventory":
+          Inventory();
+          break;
+        case "take item":
+          TakeItem("take");
+          break;
+        case "use item":
+          UseItem("use");
+          break;
+        case "help":
+          Help();
+          break;
+        case "reset":
+          Reset();
+          break;
+        case "quit":
+          Quit();
+          break;
+        default:
+          System.Console.WriteLine("Command not recognized. Please type HELP and enter for options, or try new command.");
+      }
     }
-
     public void Quit()
     {
       Console.WriteLine(@" 
@@ -106,34 +142,34 @@ namespace OregonTrail.Project
         Console.WriteLine("This way is blocked. Choose a different direction.");
       }
     }
-  public void TakeItem(string itemName)
-  {
-    Item item = CurrentRoom.Items.Find(Item => Item.Name.ToLower() == itemName);
-    if (item != null)
+    public void TakeItem(string itemName)
     {
-      CurrentRoom.Items.Remove(item);
-      CurrentPlayer.Inventory.Add(item);
-      CurrentPlayer.Inventory.Remove(item);
+      Item item = CurrentRoom.Items.Find(Item => Item.Name.ToLower() == itemName);
+      if (item != null)
+      {
+        CurrentRoom.Items.Remove(item);
+        CurrentPlayer.Inventory.Add(item);
+        CurrentPlayer.Inventory.Remove(item);
+      }
+      else
+      {
+        Console.WriteLine("You have no items.");
+      }
     }
-    else
-    {
-      Console.WriteLine("You have no items.");
-    }
-  }
 
-public void UseItem(string itemName)
-  {
-    Item item = CurrentPlayer.Inventory.Find(Item => Item.Name.ToLower() == itemName);
-  }
-
-  public void Inventory()
-  {
-    Console.WriteLine($"Inventory for {CurrentPlayer.PlayerName}: ");
-    foreach (var item in CurrentPlayer.Inventory)
+    public void UseItem(string itemName)
     {
-      Console.WriteLine(item.Name);
+      Item item = CurrentPlayer.Inventory.Find(Item => Item.Name.ToLower() == itemName);
     }
-  }
+
+    public void Inventory()
+    {
+      Console.WriteLine($"Inventory for {CurrentPlayer.PlayerName}: ");
+      foreach (var item in CurrentPlayer.Inventory)
+      {
+        Console.WriteLine(item.Name);
+      }
+    }
 
     public void Look()
     {
