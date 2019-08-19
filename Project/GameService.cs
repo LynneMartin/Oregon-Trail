@@ -13,11 +13,11 @@ namespace OregonTrail.Project
     IRoom IGameService.CurrentRoom { get; set; }
     public Player CurrentPlayer { get; set; }
 
-    public GameService(Player player)
-    {
-      CurrentPlayer = player;
-      Setup(); //connected to Program.cs
-    }
+    // public GameService(Player player)
+    // {
+    //   CurrentPlayer = player;
+    //   Setup(); //connected to Program.cs
+    // }
     // ========================== START GAME ============================
     public void Startup()
     {
@@ -60,11 +60,17 @@ namespace OregonTrail.Project
     {
       Setup();
       {
-        Console.WriteLine("It's a risky, but potentially rewarding adventure that awaits! Can you guide this family to safety?");
+        Console.WriteLine(@"
+     ___   ___   ____  __    ___   _         _____  ___    __    _   _    
+    / / \ | |_) | |_  / /`_ / / \ | |\ |      | |  | |_)  / /\  | | | |   
+    \_\_/ |_| \ |_|__ \_\_/ \_\_/ |_| \|      |_|  |_| \ /_/--\ |_| |_|__ ");
+
+        Console.WriteLine("Welcome to your new adventure!");
         Console.WriteLine("Please give me your first name, my friend.");
         var name = Console.ReadLine();
         CurrentPlayer = new Player(name);
-
+//NOTE next lines shown after entering name at start of game
+        Console.Clear();
         Console.WriteLine("We begin this long journey from Independence, Missouri."); Console.WriteLine("The first State you enter is Nebraska. There's no turning back now!");
 
         while (Running)
@@ -77,7 +83,8 @@ namespace OregonTrail.Project
 
     public void GetUserInput()
     {
-      Console.WriteLine($"What's your pleasure, {CurrentPlayer.PlayerName} ?");
+      //NOTE next question following "There's no turning back now!" in StartGame
+      Console.WriteLine($"Check your compass and tell me which direction you'd like to go, {CurrentPlayer.PlayerName}. (Type 'help' if you're not sure.)");
       string UserInput = Console.ReadLine();
       switch (UserInput.ToLower())
       {
