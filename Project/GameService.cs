@@ -8,16 +8,16 @@ namespace OregonTrail.Project
 {
   public class GameService : IGameService
   {
-    public Room CurrentRoom { get; set; } //talks to Models/Room.cs
+    // public Room CurrentRoom { get; set; } //talks to Models/Room.cs
     public bool Running = true; //GameService running
-    IRoom IGameService.CurrentRoom { get; set; }
+    public IRoom CurrentRoom { get; set; }
     public Player CurrentPlayer { get; set; }
 
     // private bool Playing { get; set; } = true;
     // ========================== START GAME ============================
     public void Startup() //NOTE WORKS!
     {
-      
+      Setup();
     }
     // ========================== RUN ============================
 
@@ -59,7 +59,7 @@ namespace OregonTrail.Project
 
       wyoming.Exits.Add("west", idaho);
       wyoming.Exits.Add("south", mercantile); //You'll avoid starvation
-      wyoming.Exits.Add("east", wyoming); 
+      wyoming.Exits.Add("east", nebraska); 
       wyoming.Exits.Add("north", wilderness); //GAME OVER
       wyoming.Items.Add(Beans); // Needed to fend of starvation
 
@@ -113,6 +113,7 @@ namespace OregonTrail.Project
     public void GetUserInput()
     {
       //NOTE replaces else/if 
+      //FIXME Use Command and option pattern from Planet Express
       string UserInput = Console.ReadLine();
       switch (UserInput.ToLower()) 
       {
@@ -187,12 +188,12 @@ namespace OregonTrail.Project
 
       if (CurrentRoom.Exits.ContainsKey(direction)) //Refers to Dictionary in Room.cs
       {
-        CurrentRoom = (Room)CurrentRoom.Exits[direction];
+        CurrentRoom = CurrentRoom.Exits[direction];
         Look();
       }
       else
       {
-        System.Console.WriteLine("Nothing that way."); //FIXME works but causes me problems with using any other direction to continue.
+        System.Console.WriteLine("Nothing that way."); //NOTE (resolved) works but causes me problems with using any other direction to continue.
       }
 
     }
@@ -205,7 +206,7 @@ namespace OregonTrail.Project
       {
         CurrentRoom.Items.Remove(item);
         CurrentPlayer.Inventory.Add(item);
-        CurrentPlayer.Inventory.Remove(item);
+        // CurrentPlayer.Inventory.Remove(item);
       }
       else //otherwise
       {
