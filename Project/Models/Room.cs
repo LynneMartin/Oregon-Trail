@@ -11,8 +11,13 @@ namespace OregonTrail.Project.Models
     public string Description { get; set; }
     public List<Item> Items { get; set; }
     public Dictionary<string, IRoom> Exits { get; set; }
-    
 
+    public void AddExit(string direction, IRoom room)
+    {
+      Exits.Add(direction, room);
+    }
+
+    
 public Room(string name, string description)
     {
       Name = name;
@@ -27,7 +32,7 @@ public Room(string name, string description)
       {
         return Exits[direction];
       }
-      Console.WriteLine("Best not go that way!");
+      Console.WriteLine("Not that way.");
       return this;
     }
   }

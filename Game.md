@@ -4,7 +4,7 @@
 
 A widow decides that Kansas City harbors too many memories of her beloved departed husband, and, in order to move on, must leave and start anew with her young daughter. At church, she overhears talk of a second wave of people leaving in 3 weeks for the wide open spaces of the Western Territories. This is EXACTLY the change she's needing to make in her life, so she heads home to pack up, sells her home to purchase a covered wagon, 2 mules, food and supplies for the trip.
 
-The scene begins in Independence, Missouri, where she meets up with the wagon train to set off towards a new life. They travel through 4 States during this adventure; Nebraska, Wyoming, Idaho, and finally settling in Baker City, Oregon.
+The scene begins in Independence, Missouri, where she meets up with the wagon train to set off towards a new life. They travel through 4 States during this adventure; Nebraska, Wyoming, Idaho, and finally settling in Oregon City, Oregon.
 
 The young widow must navigate across swift rivers, come across potentially hostile Natives, avoid starvation and deadly disease, and cross seemingly impossible mountainous terrain before he can reach her destination. Making the right decisions in every situation is vital for survival. One wrong decision and her family can perish! It is a risky and exhausting journey. Can you guide them safely to Oregon?
 
@@ -93,12 +93,12 @@ There are four key "rooms" in this story. Entering a room/State will trigger an 
 You will likely succeed or fail in this game. Here are some messages:
 
 - DEATH MESSAGES: 
-	- "The Natives don't trust you, so they killed you, your daughter, and your little 		dog, too. And they ate your oxen."
-	- "You ran out of food! Your oxen were stolen, and your family dies of starvation."
-	- "The water is too high and swift! Your family is swept away and drowns. But your 		oxen escape to safety, so that's nice."
-	- "You are out of repair supplies! In harsh mountain weather, your family dies. And 	your oxen eat you."
-- Natives Allow Passage: "You succeeded where so many others failed. The Dark Lords' reign of terror is over."
-- No Starvation Today: "Sweet relief! Your family are fed and healthy. And your oxen 		won't eat you."
+	- "You attempt to escape by heading South, but find yourself trapped by a different band of hostile Native warriors and they show no mercy. YOU DIE A HORRIBLE DEATH."
+	- "You headed Northward toward rough terrain, getting lost, losing time, and starve to death. GAME OVER."
+	- "You've reached a wide river that is deceptively deep. You attempt to cross, but are swept away, drowning all. GAME OVER."
+	- "You've come up to a daunting and dangerous mountain pass. Foolishly, you attempted to cross, but destroyed one of your wheels again. You must fix the wheel. You died of dysentery and your child and mules died of exposure. GAME OVER."
+- Natives Allow Passage: "The Natives accept your gift and allow safe passage."
+- No Starvation Today: "Sweet relief! Your family are fed and healthy. And your mules 		won't eat you."
 - River Passage: "You made it across the river safely! Onward!"
 - Mountain Pass: "Your wagon wheels held up and you reached the other side of the mountain pass in one piece! You are home!"
 

@@ -36,44 +36,50 @@ namespace OregonTrail.Project
     {
       Running = true;
 
-      //TODO Set up Rooms/States & description
-
       Room missouri = new Room("Missouri", "Starting point.");
-      Room nebraska = new Room("Nebraska", "The first State you enter.", "Going Westward, halfway across the plains, a wheel falls apart and you are separated from the wagon train. A group of Natives are spotted to the North approaching your newly-repaired wagon. If you are to get out of this situation alive, you must find something of value to offer them, or attempt to escape."); //Room 1, natives
-      Room escape = new Room("Escape", "You attempt to escape by heading South, but find yourself trapped by a different band of hostile Native warriors and they show no mercy. YOU LOSE.")
-      Room wyoming = new Room("Wyoming"); //Halfway there, but starvation looms
-      Room mercantile = new Room("Mercantile"); //Pick up food here
-      Room wilderness = new Room("Wilderness", "You headed Northward toward rough terrain, getting lost, losing time, and starve to death. GAME OVER."); //You'll lose too much time and starve to death
-      Room idaho = new Room("Idaho");
-      Room river = new Room("River", "You've reached a wide river that is deceptively deep. You attempt to cross, but are swept away, drowning all. GAME OVER.");
-      Room oregon = new Room("Oregon"); //Room 4, mountain pass
-        Room home = new Room("Baker City, Oregon", "End"); //Final Room, YOU WIN!
+      Room nebraska = new Room("Nebraska", "Going Westward, halfway across the plains, a wheel falls apart and you are separated from the wagon train. A group of Natives are spotted to the North approaching your newly-repaired wagon. If you are to get out of this situation alive, you must find something of value to offer them, or attempt to escape. Choose your direction.");
+      Room escape = new Room("Escape", "You attempt to escape by heading South, but find yourself trapped by a different band of hostile Native warriors and they show no mercy. YOU DIE A HORRIBLE DEATH. Type 'reset' to start over or 'quit' to end the game.");
+      Room wyoming = new Room("Wyoming", "Your family is hungry. Where can you go to find more food supplies? Choose your direction."); //Halfway there, but starvation looms
+      Room mercantile = new Room("Mercantile: ", "You've reached a small town with a local Mercantile. You can pick up some beans here to fend off hunger later.");
+      Room wilderness = new Room("Wilderness: ", "You headed Northward toward rough terrain, getting lost, losing time, and starve to death. GAME OVER. Type 'reset' to start over or 'quit' to end the game."); //You'll lose too much time and starve to death
+      Room idaho = new Room("Idaho", "You're only 8 days away from your destination, but you reach a deep and swift river. Do you try and cross? Or do you try a different way? Choose your direction.");
+      Room river = new Room("River: ", "You've reached a wide river that is deceptively deep. You attempt to cross, but are swept away, drowning all. GAME OVER. Type 'reset' to start over or 'quit' to end the game.");
+      Room ferry = new Room("Ferry: ", "Just up-river a few miles, you come across a man who offers ferry passage across the river for $2.00. Safe and sound!");
+      Room oregon = new Room("Oregon", "You're almost there! You've reached a daunting mountain pass that you must cross before you make it to your new home. Which direction will you take?");
+      Room mountains = new Room("Mountain Pass: ", "You've come up to a daunting and dangerous mountain pass. Foolishly, you attempted to cross, but destroyed one of your wheels again. You must fix the wheel. You died of dysentery and your child and mules died of exposure. GAME OVER. Type 'reset' to start over or 'quit' to end the game.");
+      Room home = new Room("Oregon City, Oregon:", "Home, sweet home! YOU WIN!"); //Final Room, YOU WIN!
 
       Item Gunpowder = new Item("Sack of gunpowder: ", "Desirable trade item.");
       Item Beans = new Item("50-lb bag of beans: ", "Packed with fiber and protein.");
       Item Coins = new Item("Purse of coins: ", "Looks to be approximately $5.00-worth.");
       Item WagonWheel = new Item("Wagon Wheel: ", "Replacement wagon wheel.");
 
-      missouri.Exits.Add("west", wyoming);
-      nebraska.Exits.Add("east", missouri);
-      nebraska.Exits.Add("south", escape); //Dead-end to hostile Natives. You all die!
+      missouri.Exits.Add("west", nebraska);
+
+      nebraska.Exits.Add("west", wyoming);
+      nebraska.Exits.Add("east", missouri); // back to starting point
+      nebraska.Exits.Add("south", escape); //GAME OVER
       nebraska.Items.Add(Gunpowder); //Needed to trade with friendlier Natives.
+
       wyoming.Exits.Add("west", idaho);
-      wyoming.Exits.Add("south", mercantile, "You've reached a small town with a local Mercantile. Here, you can purchase food to fend off starvation."); //You'll avoid starvation
+      wyoming.Exits.Add("south", mercantile); //You'll avoid starvation
       wyoming.Exits.Add("east", wyoming); 
-      wyoming.Exits.Add("north", wilderness); //You get lost and lose too much time, so you starve to death.
-      wyoming.Items.Add(Beans);
+      wyoming.Exits.Add("north", wilderness); //GAME OVER
+      wyoming.Items.Add(Beans); // Needed to fend of starvation
+
       idaho.Exits.Add("west", oregon);
       idaho.Exits.Add("east", wyoming);
+      idaho.Exits.Add("south", river); //GAME OVER
+      idaho.Exits.Add("north", ferry);
+      idaho.Items.Add(Coins); // Needed to buy a ferry ride across the river
 
+      oregon.Exits.Add("east", idaho);
+      oregon.Exits.Add("north", home); //YOU WIN!
+      oregon.Exits.Add("west", mountains); //GAME OVER unless you use a wagon wheel
+      oregon.Items.Add(WagonWheel); //Needed to cross the mountains
 
+      CurrentRoom = nebraska;
 
-
-      //   //Establish Relationships
-      // nebraska.AddLocation("next", wyoming);
-      // wyoming.AddLocation("next", idaho);
-      // idaho.AddLocation("next", oregon);
-      //TODO Set up Room/State exits
     }
     // ========================== RESET ============================
 
@@ -100,7 +106,7 @@ namespace OregonTrail.Project
         CurrentPlayer = new Player(name);
 //NOTE next lines shown after entering name at start of game
         Console.Clear();
-        Console.WriteLine("We begin this long journey from Independence, Missouri."); Console.WriteLine("The first State you enter is Nebraska. There's no turning back now!");
+        Console.WriteLine("We begin this long journey from Independence, Missouri."); Console.WriteLine("The first State you enter ahead is Nebraska heading West. Type 'go west' to be taken there now.");
 
         while (Running)
         {
@@ -113,7 +119,7 @@ namespace OregonTrail.Project
     public void GetUserInput()
     {
       //NOTE next question following "There's no turning back now!" in StartGame
-      Console.WriteLine($"Check your compass and tell me which direction you'd like to go, {CurrentPlayer.PlayerName}.");
+      // Console.WriteLine($"When you're ready to head 'em up and move 'em out, type 'go west' now, {CurrentPlayer.PlayerName}.");
       string UserInput = Console.ReadLine();
       switch (UserInput.ToLower())
       {
@@ -184,15 +190,24 @@ namespace OregonTrail.Project
 
     public void Go(string direction)
     {
-      Console.Clear();
       if (CurrentRoom.Exits.ContainsKey(direction))
       {
         CurrentRoom = (Room)CurrentRoom.Exits[direction];
+        Look();
       }
       else
       {
-        Console.WriteLine("This way is blocked. Choose a different direction.");
+        System.Console.WriteLine("Nothing that way.");
       }
+      // Console.Clear();
+      // if (CurrentRoom.Exits.ContainsKey(direction))
+      // {
+      //   CurrentRoom = (Room)CurrentRoom.Exits[direction];
+      // }
+      // else
+      // {
+      //   Console.WriteLine("This way is blocked. Choose a different direction.");
+      // }
     }
     // ========================== TAKE ITEM ============================
 
@@ -222,7 +237,7 @@ namespace OregonTrail.Project
       Console.WriteLine($"Inventory for {CurrentPlayer.PlayerName}: ");
       foreach (var item in CurrentPlayer.Inventory)
       {
-        Console.WriteLine(item.Name);
+        Console.WriteLine($"{ item.Name}");
       }
     }
     // ========================== LOOK ============================
