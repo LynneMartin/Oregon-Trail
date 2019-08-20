@@ -8,7 +8,7 @@ namespace OregonTrail.Project
 {
   public class GameService : IGameService
   {
-    public bool Playing { get; set; } = true; //GameService running loop
+    public bool Playing { get; set; } = true; //GameService Play loop
     public IRoom CurrentRoom { get; set; }
     public Player CurrentPlayer { get; set; }
 
