@@ -12,9 +12,7 @@ namespace OregonTrail.Project.Models
     public List<Item> Items { get; set; }
     public Dictionary<string, IRoom> Exits { get; set; } //"key" is between < >
 
-
-    
-public Room(string name, string description)
+    public Room(string name, string description)
     {
       Name = name;
       Description = description;

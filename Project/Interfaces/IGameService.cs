@@ -4,7 +4,7 @@ using OregonTrail.Project.Models;
 namespace OregonTrail.Project.Interfaces
 {
     public interface IGameService
-    {
+        {
         IRoom CurrentRoom { get; set; }
         Player CurrentPlayer { get; set; }
 

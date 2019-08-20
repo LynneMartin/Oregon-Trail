@@ -24,6 +24,34 @@ namespace OregonTrail.Project
     {
     
     }
+
+    // ========================== START GAME ============================
+
+    public void StartGame() //NOTE WORKS!
+    {
+      Setup();
+      {
+        Console.WriteLine(@"
+     ___   ___   ____  __    ___   _         _____  ___    __    _   _    
+    / / \ | |_) | |_  / /`_ / / \ | |\ |      | |  | |_)  / /\  | | | |   
+    \_\_/ |_| \ |_|__ \_\_/ \_\_/ |_| \|      |_|  |_| \ /_/--\ |_| |_|__ ");
+
+        Console.WriteLine("Welcome to your new adventure!");
+        Console.WriteLine("Please give me your first name, my friend.");
+        var name = Console.ReadLine();
+        CurrentPlayer = new Player(name);
+        //NOTE next lines shown after entering name at start of game
+        Console.Clear();
+        Console.WriteLine("We begin this long journey from Independence, Missouri.");
+        Console.WriteLine("The first State you enter ahead is Nebraska heading West.");
+        Console.WriteLine("Type 'go west' to be taken there now.");
+
+        while (Running)
+        {
+          GetUserInput(); //NOTE WORKS!
+        }
+      }
+    }
     // ========================== SETUP ============================
 
     public void Setup() //NOTE WORKS!
@@ -75,65 +103,25 @@ namespace OregonTrail.Project
       CurrentRoom = missouri; //NOTE starting point
 
     }
-    // ========================== RESET ============================
+    
 
-    public void Reset() //NOTE WORKS!
-    {
-      StartGame();
-    }
-    // ========================== START GAME ============================
-
-    public void StartGame() //NOTE WORKS!
-    {
-      Setup();
-      {
-        Console.WriteLine(@"
-     ___   ___   ____  __    ___   _         _____  ___    __    _   _    
-    / / \ | |_) | |_  / /`_ / / \ | |\ |      | |  | |_)  / /\  | | | |   
-    \_\_/ |_| \ |_|__ \_\_/ \_\_/ |_| \|      |_|  |_| \ /_/--\ |_| |_|__ ");
-
-        Console.WriteLine("Welcome to your new adventure!");
-        Console.WriteLine("Please give me your first name, my friend.");
-        var name = Console.ReadLine();
-        CurrentPlayer = new Player(name);
-//NOTE next lines shown after entering name at start of game
-        Console.Clear();
-        Console.WriteLine("We begin this long journey from Independence, Missouri."); 
-        Console.WriteLine("The first State you enter ahead is Nebraska heading West."); 
-        Console.WriteLine("Type 'go west' to be taken there now.");
-
-        while (Running)
-        {
-          GetUserInput(); //NOTE WORKS!
-        }
-      }
-    }
     // ========================== GET USER INPUT ============================
 
     public void GetUserInput()
     {
-      //referenced in planet-express example
+      //REVIEW referenced in planet-express example. Please 'splain?
       string[] input = Console.ReadLine().ToLower().Split(' '); //input = ['go', 'north']
       string command = input[0]; //command = 'go'
-      string option = ""; //option = ''
+      string option = "";
       if (input.Length > 1)
       {
-        option = input[1]; //option = 'luna'
+        option = input[1]; 
       }
-      //'go'
+      
       switch(command)
       {
-        case "go north":
-          Go("north");
-          break;
-        case "go south":
-          Go("south");
-          break;
-        case "go east":
-          Go("east");
-          break;
-        case "go west":
-          Go("west");
+        case "go":
+          Go(option);
           break;
         case "look":
           Look();
@@ -162,6 +150,12 @@ namespace OregonTrail.Project
           break;
       }
     }
+    // ========================== RESET ============================
+    public void Reset() //NOTE WORKS!
+    {
+      StartGame();
+    }
+
     // ========================== QUIT ============================
 
     public void Quit() //NOTE WORKS!
@@ -192,37 +186,37 @@ namespace OregonTrail.Project
 
       -Press enter to go back to the game. 
       ");
-      Console.ReadLine(); //FIXME "Press Enter to go back to the game" not wired up. Should the command be "exit" or "done" to go back to current room instead of the act of pressing the enter button?
+      Console.ReadLine(); //FIXME Should the command be "exit" or "done" to go back to current room instead of the act of pressing the enter button? I couldn't figure out how to get this last help command working with 'enter'.
     }
 
     // ========================== GO ============================
-
     public void Go(string direction)
     {
-      if (CurrentRoom.Exits.ContainsKey(direction)) //Refers to Dictionary in Room.cs
+      Console.Clear();
+      if (CurrentRoom.Exits.ContainsKey(direction))
       {
-        Console.WriteLine("Onward, mules!");
-        Console.Clear();
         CurrentRoom = CurrentRoom.Exits[direction];
       }
       else
       {
-        Console.WriteLine("Nothing that way."); 
+        Console.WriteLine("This way is blocked. Choose a different direction.");
       }
     }
+
     // ========================== TAKE ITEM ============================
 
-    public void TakeItem(string itemName) //FIXME unfinished TEST. an if/else statement is a familiar way to go, but this can be done differently
-    {
+    public void TakeItem(string itemName) 
+      {
       Item item = CurrentRoom.Items.Find(Item => Item.Name.ToLower() == itemName);
       if (item != null) 
       {
-        CurrentRoom.Items.Remove(item);
-        CurrentPlayer.Inventory.Add(item);
+        Console.WriteLine($"You have {item.Description} available to take with you.");
+        CurrentRoom.Items.Remove(item); //take an available item from a room
+        CurrentPlayer.Inventory.Add(item); //add it to my inventory, in this order
       }
-      else //otherwise
+      else
       {
-        Console.WriteLine("You have no items.");
+        Console.WriteLine("Invalid request. Type 'help' or try again.");
       }
     }
     // ========================== USE ITEM ============================
@@ -230,12 +224,21 @@ namespace OregonTrail.Project
     public void UseItem(string itemName)
     {
       Item item = CurrentPlayer.Inventory.Find(Item => Item.Name.ToLower() == itemName);
-      //FIXME unfinished
+      if (item != null)
+      {
+        CurrentPlayer.Inventory.Remove(item);
+        Console.WriteLine("Item successfully used. Carry on!");
+      }
+      else
+      {
+        Console.WriteLine("Item not available.");
+      }
+
     }
     // ========================== INVENTORY ============================
-    public void Inventory() //NOTE works but haven't figured out how to take items to add to the inventory
+    public void Inventory() 
     {
-      Console.WriteLine($"Inventory for {CurrentPlayer.PlayerName}: ");
+      Console.WriteLine($"Current inventory for {CurrentPlayer.PlayerName}: ");
       foreach (var item in CurrentPlayer.Inventory) //iterates over each item in the player's inventory
       {
         Console.WriteLine($"{ item.Name}");
@@ -245,7 +248,10 @@ namespace OregonTrail.Project
 
     public void Look() 
     {
-      Console.WriteLine($"{CurrentRoom.Description}"); //show's the current room's description
+      Console.WriteLine($"{CurrentRoom.Description}"); 
+      //TODO show items in the current room with a count, probably using a for loop
     }
   }
 }
+
+//TODO Need a win & lose 

@@ -7,10 +7,9 @@ namespace OregonTrail.Project.Models
   {
     public string PlayerName { get; set; }
     public List<Item> Inventory { get; set; }
-
-public Player(string playername)
+    public Player(string name)
     {
-        PlayerName = playername;
+        PlayerName = name;
         Inventory = new List<Item>();
     }
   }
