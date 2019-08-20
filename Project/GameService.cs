@@ -185,7 +185,7 @@ namespace OregonTrail.Project
 
       -Press enter to go back to the game. 
       ");
-      Console.ReadLine(); //FIXME Should the command be "exit" or "done" to go back to current room instead of the act of pressing the enter button? I couldn't figure out how to get this last help command working with 'enter'.
+       //FIXME Should the command be "exit" or "done" to go back to current room instead of the act of pressing the enter button? I couldn't figure out how to get this last help command working with 'enter'.
     }
 
     // ========================== GO ============================
