@@ -8,7 +8,7 @@ namespace OregonTrail.Project
 {
   public class GameService : IGameService
   {
-    public bool Running { get; set; } = true; //GameService running
+    public bool Playing { get; set; } = true; //GameService running loop
     public IRoom CurrentRoom { get; set; }
     public Player CurrentPlayer { get; set; }
 
@@ -22,7 +22,7 @@ namespace OregonTrail.Project
     //NOTE Runs GameService
     public void Run()
     {
-    
+
     }
 
     // ========================== START GAME ============================
@@ -46,7 +46,7 @@ namespace OregonTrail.Project
         Console.WriteLine("The first State you enter ahead is Nebraska heading West.");
         Console.WriteLine("Type 'go west' to be taken there now.");
 
-        while (Running)
+        while (Playing)
         {
           GetUserInput(); //NOTE WORKS!
         }
@@ -56,7 +56,7 @@ namespace OregonTrail.Project
 
     public void Setup() //NOTE WORKS!
     {
-      Running = true;
+      Playing = true;
 
       Room missouri = new Room("Missouri", "Starting point."); //take in a name and description
       Room nebraska = new Room("Nebraska", "Going Westward, halfway across the plains, a wheel falls apart and you are separated from the wagon train. A group of Natives are spotted to the North approaching your newly-repaired wagon. If you are to get out of this situation alive, you must find something of value to offer them, or attempt to escape. Choose your direction.");
@@ -85,7 +85,7 @@ namespace OregonTrail.Project
 
       wyoming.Exits.Add("west", idaho);
       wyoming.Exits.Add("south", mercantile); //You'll avoid starvation
-      wyoming.Exits.Add("east", nebraska); 
+      wyoming.Exits.Add("east", nebraska);
       wyoming.Exits.Add("north", wilderness); //GAME OVER
       wyoming.Items.Add(Beans); // Needed to fend of starvation
 
@@ -103,22 +103,22 @@ namespace OregonTrail.Project
       CurrentRoom = missouri; //NOTE starting point
 
     }
-    
+
 
     // ========================== GET USER INPUT ============================
 
     public void GetUserInput()
     {
-      //REVIEW referenced in planet-express example. Please 'splain?
+      // referenced in planet-express example
       string[] input = Console.ReadLine().ToLower().Split(' '); //input = ['go', 'north']
       string command = input[0]; //command = 'go'
-      string option = "";
+      string option = ""; // a direction
       if (input.Length > 1)
       {
-        option = input[1]; 
+        option = input[1];
       }
-      
-      switch(command)
+
+      switch (command)
       {
         case "go":
           Go(option);
@@ -130,10 +130,10 @@ namespace OregonTrail.Project
           Inventory();
           break;
         case "take item":
-          TakeItem("take");
+          TakeItem(option);
           break;
         case "use item":
-          UseItem("use");
+          UseItem(option);
           break;
         case "help":
           Help();
@@ -142,10 +142,9 @@ namespace OregonTrail.Project
           Reset();
           break;
         case "quit":
-          Quit(); //REVIEW is this necessary if I have Running = false below?
-          Running = false;
+          Quit();
           break;
-        default: 
+        default:
           System.Console.WriteLine("Command not recognized. Please type HELP for options, or try valid command.");
           break;
       }
@@ -165,7 +164,7 @@ namespace OregonTrail.Project
      __ _        _     __       _  _  _ ___    __ _  | 
     (_ / \   |  / \|\|/__      |_)|_||_) | |\||_ |_) | 
     __)\_/   |__\_/| |\_| /    |  | || \ | | ||__| \ o ");
-      Running = false; //stops the game
+      Playing = false; //stops the game
     }
     // ========================== HELP ============================
     public void Help() //NOTE WORKS, except "enter to go back to the game"!
@@ -205,10 +204,10 @@ namespace OregonTrail.Project
 
     // ========================== TAKE ITEM ============================
 
-    public void TakeItem(string itemName) 
-      {
+    public void TakeItem(string itemName)
+    {
       Item item = CurrentRoom.Items.Find(Item => Item.Name.ToLower() == itemName);
-      if (item != null) 
+      if (item != null)
       {
         Console.WriteLine($"You have {item.Description} available to take with you.");
         CurrentRoom.Items.Remove(item); //take an available item from a room
@@ -236,7 +235,7 @@ namespace OregonTrail.Project
 
     }
     // ========================== INVENTORY ============================
-    public void Inventory() 
+    public void Inventory()
     {
       Console.WriteLine($"Current inventory for {CurrentPlayer.PlayerName}: ");
       foreach (var item in CurrentPlayer.Inventory) //iterates over each item in the player's inventory
@@ -246,12 +245,11 @@ namespace OregonTrail.Project
     }
     // ========================== LOOK ============================
 
-    public void Look() 
+    public void Look()
     {
-      Console.WriteLine($"{CurrentRoom.Description}"); 
+      Console.WriteLine($"{CurrentRoom.Description}");
       //TODO show items in the current room with a count, probably using a for loop
     }
   }
 }
-
 //TODO Need a win & lose 
