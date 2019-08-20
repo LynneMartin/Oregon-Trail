@@ -237,7 +237,7 @@ namespace OregonTrail.Project
     // ========================== INVENTORY ============================
     public void Inventory()
     {
-      Console.WriteLine($"Current inventory for {CurrentPlayer.PlayerName}: ");
+      Console.WriteLine($"Current inventory for {CurrentPlayer.PlayerName}: "); //REVIEW While this works, should it be CurrentPlayer.name or stay as-is?
       foreach (var item in CurrentPlayer.Inventory) //iterates over each item in the player's inventory
       {
         Console.WriteLine($"{ item.Name}");
